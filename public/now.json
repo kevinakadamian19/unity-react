@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "unity-assistant-app",
+  "alias": "damian-unity-app",
+  "routes": [
+      {
+        "src": "^/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
+        "src": ".*",
+        "dest": "/index.html"
+      }
+  ]
+}
