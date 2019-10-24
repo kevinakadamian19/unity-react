@@ -1,69 +1,95 @@
 import React, {Component} from 'react';
+import { Route, Link } from 'react-router-dom';
 import Budget from '../Budget/Budget';
-import ItemList from '../ItemList/ItemList';
-import SettingsForm from '../SettingsForm/SettingsForm'
-import dummyData from '../dummy-data';
+import UnityContext from '../UnityContext'
+import GuestList from '../GuestList/GuestList';
+import AddGuest from '../AddGuest/AddGuest';
+import ExpenseList from '../ExpenseList/ExpenseList';
+import AddExpense from '../AddExpense/AddExpense';
+import tableData from '../dummy-data';
 import './app.css'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      dummyData,
-      showSettingsForm: false
+      budget: '',
+      guests: [],
+      expenses: []
     }
   }
 
-  updateSettings() {
-    this.setState({
-      showSettingsForm: true
-    });
-  }
 
   handleAddGuest = guest => {
     this.setState({
-      ...this.state.guest,
-      guest
+      guests: [
+        ...this.state.guests,
+        guest
+      ]
     })
   }
   handleAddExpense = expense => {
     this.setState({
-      ...this.state.expense,
-      expense
+      expenses: [
+        this.state.expenses,
+        expense
+      ]
+    })
+  }
+  handleRemoveGuest = guestId => {
+    this.setState({
+      guests: this.state.guests.filter(guest => guest.id !== guestId)
+    })
+  }
+  handleRemoveExpense = expenseId => {
+    this.setState({
+      expenses: this.state.expenses.filter(expense => expense.id !== expenseId)
     })
   }
 
   render() {
-    const setting = this.state.showSettingsForm
-      ? <SettingsForm />
-      : <App />
-
+    const contextValue = {
+      budget: this.state.budget,
+      guests: this.state.guests,
+      expenses: this.state.expenses,
+      addGuest: this.handleAddGuest,
+      addExpense: this.handleAddExpense,
+      removeExpense: this.handleRemoveExpense,
+      removeGuest: this.handleRemoveGuest
+    }
     return (
+      <UnityContext.Provider value={contextValue}>
       <div className='App'>
-        <nav className="nav">
-          <button type='button' onClick={this.updateSettings}>Settings</button>
-        </nav>
-      <main className="main">
-        <header className="banner">
+        <main className="main">
+          <header className="banner">
             <h1>Unity Assistant</h1>
-        </header>
+            <h4>Your personal wedding planner assistant!</h4>
+          </header>
 
-      <section>
-        <Budget />
-      </section>
+        <section>
+          <Budget />
+        </section>
 
         <section>
           <h2>Guest List</h2>
-          <h3>Full Name | Email</h3>
-          <ItemList />
+          <GuestList guests={tableData.guests}/>
         </section>
 
         <section>
-          <h2>Wedding Expenses</h2>
-          <ItemList />
+          <AddGuest />
+        </section>
+
+        <section>
+          <h2>Item List</h2>
+          <ExpenseList expenses={tableData.expenses}/>
+        </section>
+
+        <section>
+          <AddExpense />
         </section>
     </main>
       </div>
+      </UnityContext.Provider>
     );
   }
 }
