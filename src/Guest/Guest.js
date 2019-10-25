@@ -5,13 +5,13 @@ class Guest extends Component {
     render() {
       const {id, name, email} = this.props;
       return(
-        <div className='Guest-item'>
-          <ul id={id}>
+        <div className='guest' id={id}>
+          <ul>
             <li>{name}</li>
             <li>{email}</li>
           </ul>
           <button 
-            className='Guest_delete'
+            className='guest-delete'
             type="button"
           >
             Remove

@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
+import './Expense.css'
 
 class Expense extends Component {
     render() {
       const {id, item, note, price} = this.props;
       return(
-        <div className='Expense_item'>
-          <div id={id}>
-            <li>{item}</li>
-            <li>Note: {note}</li>
-            <li>Cost: ${price}</li>
-          </div>
+        <div className='expense' id={id}>
+            <p>{item}</p>
+            <p>{note}</p>
+            <p>{price}</p>
           <button 
-            className='Expense_delete'
+            className='expense-delete'
             type="button"
           >
             Remove

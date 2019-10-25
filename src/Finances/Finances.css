@@ -1,0 +1,10 @@
+.finances {
+    display: flex;
+    flex-direction: column;
+    border: 2px dotted black;
+}
+
+.field {
+    display: inline-block;
+    padding: 5px;
+}

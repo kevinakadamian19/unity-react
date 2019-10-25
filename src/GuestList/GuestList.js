@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
+import AddGuest from '../AddGuest/AddGuest'
 import Guest from '../Guest/Guest';
+import './GuestList.css'
 
 class GuestList extends Component {
     render() {
         const guests = this.props.guests
         return(
-            <div className='Guest_List'>
+            <div className='guest-list'>
+              <h2>Guest List</h2>
               <ul>
                 {guests.map(guest => 
                   <li key={guest.id}>
@@ -18,16 +21,23 @@ class GuestList extends Component {
                   </li>
                 )}
               </ul>
-              <button 
-                type="button"
-                to='/add-guest'
-                tag={Link}
+              
+              <Route
+                path='/add-guest' 
+                handleAddGuest={this.handleAddGuest}
+                component={AddGuest}/>
+              <Link
+                to={'/add-guest'}
               >
                 Add Guest
-              </button>
+              </Link>
             </div>
         )
     }
-  }
+}
+
+GuestList.defaultProps = {
+  guests: []
+}
 
 export default GuestList;

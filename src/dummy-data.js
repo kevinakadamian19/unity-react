@@ -1,9 +1,16 @@
 export default {
+    'finances': [
+      {
+        'id': '1',
+        'spent': '0',
+        'budget': '42,500'
+      }
+    ],
     'guests': [
         {
           'id': '1',
           'name': 'Li Shang',
-          'email': 'Down2Business@gmail.com'
+          'email': 'Be4Man@gmail.com'
         },
         {
           'id': '2',
@@ -13,7 +20,7 @@ export default {
     ],
     'expenses': [
       {
-          'item': `Chien Po's Dumplings`,
+          'item': `Po's Dumplings`,
           'note': 'Catering: Pork, beef, chicken',
           'price': '1000'
       },

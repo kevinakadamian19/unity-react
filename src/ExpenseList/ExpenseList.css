@@ -1,0 +1,7 @@
+.expense-list {
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    align-items: center;
+    border: 2px dotted black;
+}
