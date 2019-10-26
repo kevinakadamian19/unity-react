@@ -1,20 +1,16 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import Finances from '../Finances/Finances';
-//import UnityContext from '../UnityContext'
+import UnityContext from '../UnityContext'
 import GuestList from '../GuestList/GuestList';
 import ExpenseList from '../ExpenseList/ExpenseList';
-import tableData from '../dummy-data';
+import unityData from '../config';
 import './app.css'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      finances: tableData.finances[0],
-      guests: tableData.guests,
-      expenses: tableData.expenses
-    }
+    this.state = {unityData}
   }
 
   handleUpdateFinance = budget => {
@@ -42,8 +38,18 @@ class App extends Component {
   }
 
   render() {
+    const contextValue = {
+      finances: this.state.finances,
+      guests: this.state.guests,
+      expenses: this.state.expenses,
+      handleUpdateFinance: this.handleUpdateFinance,
+      addGuest: this.handleAddGuest,
+      addExpense: this.handleAddExpense,
+      removeExpense: this.handleRemoveExpense,
+      removeGuest: this.handleRemoveGuest
+  }
     return (
-      //<UnityContext.Provider value={contextValue}>
+      <UnityContext.Provider value={contextValue}>
         <div className='App'>
           <main className="main">
             <header className="banner">
@@ -64,7 +70,7 @@ class App extends Component {
               />
           </main>
         </div>
-     // </UnityContext.Provider>
+     </UnityContext.Provider>
     );
   }
 }

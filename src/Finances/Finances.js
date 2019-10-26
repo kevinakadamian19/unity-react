@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import './Finances.css'
-//import UnityContext from '../UnityContext';
+import UnityContext from '../UnityContext'
 
 class Finances extends Component {
+    static contextType = UnityContext;
+    
     render() {
         return(
             <div className='finances'>
