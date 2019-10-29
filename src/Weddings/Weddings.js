@@ -9,11 +9,11 @@ class Weddings extends Component {
         super(props)
         this.state = {
             budget: {
-                value: '',
+                value: 0,
                 touched: false
             },
             spending: {
-                value: '',
+                value: 0,
                 touched: false
             }
         }
@@ -90,7 +90,6 @@ class Weddings extends Component {
                             type='number' 
                             id='budget-input' 
                             name='budget-input'
-                            defaultValue='0'
                             onChange={e => this.updateBudgetValue(e.target.value)}
                         />
                         {this.state.budget.touched.value && (
@@ -107,7 +106,6 @@ class Weddings extends Component {
 }
 
 Weddings.defaultProps = {
-    spending: 0,
     budget: 0
 }
 

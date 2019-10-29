@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). This is the static application for Unity Assistant; a wedding planner application that displays a user friendly interface for keeping track of your wedding details
 
 ## Available Scripts
 
