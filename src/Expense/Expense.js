@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import unityData from '../dummy-data'
 import UnityContext from'../UnityContext'
-import PropTypes from 'prop-types';
 import './Expense.css'
 
 class Expense extends Component {

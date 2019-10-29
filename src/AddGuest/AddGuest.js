@@ -28,6 +28,7 @@ class AddGuest extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const newGuest = {
+        id: 7,
         guest: e.target['guest-name'].value,
         email: e.target['guest-email'].value,
         eventid: 1

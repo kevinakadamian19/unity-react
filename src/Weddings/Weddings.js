@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import unityData from '../dummy-data';
 import ValidationError from '../ValidationError'
 import './Weddings.css'
 import UnityContext from '../UnityContext';
