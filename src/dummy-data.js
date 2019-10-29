@@ -1,33 +1,51 @@
 export default {
-    'finances': [
+    'weddings': [
       {
         'id': '1',
-        'spent': '0',
-        'budget': '42,500'
+        'spending': '0',
+        'budget': '32,000'
+      },
+      {
+        'id': '2',
+        'spending': '4500',
+        'budget': '45000'
       }
     ],
     'guests': [
         {
           'id': '1',
           'name': 'Li Shang',
-          'email': 'Be4Man@gmail.com'
+          'email': 'Be4Man@gmail.com',
+          'eventId': '1'
         },
         {
           'id': '2',
           'name': 'Zhu Fa',
-          'email': 'WarriorZu@gmail.com'
+          'email': 'WarriorZu@gmail.com',
+          'eventId': '1'
         }
     ],
     'expenses': [
       {
-          'item': `Po's Dumplings`,
+          'id': '1',
+          'expense': `Po's Dumplings`,
           'note': 'Catering: Pork, beef, chicken',
-          'price': '1000'
+          'price': '1000',
+          'eventId': '1'
       },
       {
-          'item': `Emporer's Palace`,
+          'id': '2',
+          'expense': `Emporer's Palace`,
           'note': 'Venue for Tea Ceremony',
-          'price': '2500'
+          'price': '2500',
+          'eventId': '1'
+      },
+      {
+          'id': '3',
+          'expense': 'Mushu Pork Roast',
+          'note': 'Gifts',
+          'price': '5000',
+          'eventId': '1'
       }
     ]
   }

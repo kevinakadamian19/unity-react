@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
-import Finances from '../Finances/Finances';
-//import UnityContext from '../UnityContext'
-import GuestList from '../GuestList/GuestList';
-import ExpenseList from '../ExpenseList/ExpenseList';
+import UnityContext from '../UnityContext';
+import Overview from '../Overview/Overview';
+import AddGuest from '../AddGuest/AddGuest';
+import AddExpense from '../AddExpense/AddExpense'
 import tableData from '../dummy-data';
 import './app.css'
 
@@ -11,15 +11,15 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      finances: tableData.finances[0],
+      weddings: tableData.weddings[0],
       guests: tableData.guests,
       expenses: tableData.expenses
     }
   }
 
-  handleUpdateFinance = budget => {
+  handleUpdateWedding = wedding => {
     this.setState({
-     finances: budget
+     weddings: wedding
     })
   }
 
@@ -35,36 +35,61 @@ class App extends Component {
   handleAddExpense = expense => {
     this.setState({
       expenses: [
-        this.state.expenses,
+        ...this.state.expenses,
         expense
       ]
+    });
+  }
+
+  handleDeleteGuest = guestId => {
+    this.setState({
+      guests: this.state.guests.filter(guest => guest.id !== guestId)
     })
   }
 
+  handleDeleteExpense = expenseId => {
+    this.setState({
+      expenses: this.state.expenses.filter(expense => expense.id !== expenseId)
+    })
+  }
+
+
   render() {
+    const contextValue = {
+      weddings: this.state.weddings,
+      guests: this.state.guests,
+      expenses: this.state.expenses,
+      updateWedding: this.handleUpdateWedding,
+      addGuest: this.handleAddGuest,
+      addExpense: this.handleAddExpense,
+      deleteExpense: this.handleDeleteExpense,
+      deleteGuest: this.handleDeleteGuest
+    } 
     return (
-      //<UnityContext.Provider value={contextValue}>
+      <UnityContext.Provider value={contextValue}>
         <div className='App'>
           <main className="main">
             <header className="banner">
               <h1>Unity Assistant</h1>
               <h4>Your personal wedding planner assistant!</h4>
             </header>
-              <Finances 
-                finances={this.state.finances}
-                handleUpdateFinance={this.handleUpdateFinance}
-              />
-          
-              <GuestList 
-                guests={this.state.guests}
-              />
-   
-              <ExpenseList 
-                expenses={this.state.expenses}
-              />
+              <Route 
+              exact
+              path='/'
+              component={Overview}/>
+
+              <Route
+                exact
+                path='/add-guest'
+                component={AddGuest}/>
+
+              <Route
+                exact
+                path='/add-expense'
+                component={AddExpense}/>
           </main>
         </div>
-     // </UnityContext.Provider>
+     </UnityContext.Provider>
     );
   }
 }

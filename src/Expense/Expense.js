@@ -1,7 +1,34 @@
 import React, { Component } from 'react'
+import unityData from '../dummy-data'
+import UnityContext from'../UnityContext'
+import PropTypes from 'prop-types';
 import './Expense.css'
 
 class Expense extends Component {
+  static contextType = UnityContext;
+
+    handleClickDelete = e => {
+      e.preventDefault();
+      const expenseId = this.props.id
+      this.context.deleteExpense(expenseId)
+      /*fetch(`${unityData}/expenses/${expenseId}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      .then(res => {
+        if(!res.ok) {
+          return res.json().then(e => Promise.reject(e))
+        } return res.json()
+      })
+      .then(() => {
+        this.context.deleteExpense(expenseId)
+      })
+      .catch(error => {
+        console.error({error})
+      })*/
+    }
     render() {
       const {id, item, note, price} = this.props;
       return(
@@ -12,6 +39,7 @@ class Expense extends Component {
           <button 
             className='expense-delete'
             type="button"
+            onClick={e => this.handleClickDelete(e)}
           >
             Remove
           </button>

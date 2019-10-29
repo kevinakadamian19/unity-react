@@ -1,12 +1,26 @@
 import React, {Component} from 'react';
-import { Route, Link } from 'react-router-dom';
-import AddGuest from '../AddGuest/AddGuest'
+import { Link } from 'react-router-dom';
 import Guest from '../Guest/Guest';
+import UnityContext from '../UnityContext'
 import './GuestList.css'
 
 class GuestList extends Component {
+  static defaultProps = {
+    match: {
+      params: {}
+    },
+    history: {
+      push: () => {}
+    },
+  }
+  static contextType = UnityContext;
+
+  handleDeleteGuest = guestId => {
+    this.props.history.push('/')
+  }
+
     render() {
-        const guests = this.props.guests
+        const {guests} = this.context;
         return(
             <div className='guest-list'>
               <h2>Guest List</h2>
@@ -17,27 +31,24 @@ class GuestList extends Component {
                       id={guest.id}
                       name={guest.name}
                       email={guest.email}
+                      onDeleteGuest={this.handleDeleteGuest}
                     />
                   </li>
                 )}
               </ul>
-              
-              <Route
-                path='/add-guest' 
-                handleAddGuest={this.handleAddGuest}
-                component={AddGuest}/>
-              <Link
-                to={'/add-guest'}
-              >
-                Add Guest
+              <Link to='/add-guest'>
+                <button  type="button">
+                  Add Guest
+                </button>
               </Link>
             </div>
         )
     }
 }
 
+export default GuestList;
+
+
 GuestList.defaultProps = {
   guests: []
 }
-
-export default GuestList;
