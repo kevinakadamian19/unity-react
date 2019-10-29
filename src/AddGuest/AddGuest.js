@@ -29,7 +29,7 @@ class AddGuest extends Component {
       e.preventDefault();
       const newGuest = {
         id: 7,
-        guest: e.target['guest-name'].value,
+        name: e.target['guest-name'].value,
         email: e.target['guest-email'].value,
         eventid: 1
       }
