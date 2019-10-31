@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Expense from '../Expense/Expense';
 import UnityContext from '../UnityContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faListAlt } from '@fortawesome/free-solid-svg-icons'
 import './ExpenseList.css'
 
 class ExpenseList extends Component {
@@ -22,24 +24,33 @@ class ExpenseList extends Component {
         const {expenses} = this.context;
         return(
             <div className='expense-list'>
-              <h2>Expenses</h2>
-              <ul>
-                {expenses.map(expense =>
-                  <li key={expense.id}>
-                    <Expense
-                      id={expense.id}
-                      item={expense.expense}
-                      note={expense.note}
-                      price={expense.price}
-                      onDeleteExpense={this.handleDeleteExpense}
-                    />
-                  </li>
-                )}
-              </ul>
-
+              <h1>To-Do <FontAwesomeIcon icon={faListAlt} /></h1>
+              <table className='fixed-expense-table'>
+                <thead>
+                  <tr>
+                    <th>Vendor</th>
+                    <th>Note</th>
+                    <th>Price</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {expenses.map(expense => 
+                    <tr key={expense.id}>
+                          { <Expense
+                            id={expense.id}
+                            vendor={expense.vendor}
+                            note={expense.note}
+                            price={expense.price}
+                            onDeleteExpense={this.handleDeleteExpense}
+                          /> }
+                    </tr>
+                  )}
+                </tbody>
+              </table>
               <Link  to='/add-expense'>
                 <button type="button">
-                  Add
+                  Add to List
                 </button>
               </Link>
             </div>

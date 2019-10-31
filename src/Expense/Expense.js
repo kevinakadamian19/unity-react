@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import UnityContext from'../UnityContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import './Expense.css'
 
 class Expense extends Component {
@@ -28,20 +30,22 @@ class Expense extends Component {
       })*/
     }
     render() {
-      const {id, item, note, price} = this.props;
+      const {vendor, note, price} = this.props;
       return(
-        <div className='expense' id={id}>
-            <p>{item}</p>
-            <p>{note}</p>
-            <p>{price}</p>
-          <button 
-            className='expense-delete'
-            type="button"
-            onClick={e => this.handleClickDelete(e)}
-          >
-            Remove
-          </button>
-        </div>
+        <>
+            <td>{vendor}</td>
+            <td>{note}</td>
+            <td>{price}</td>
+            <td>
+              <button 
+                className='expense-delete'
+                type="button"
+                onClick={e => this.handleClickDelete(e)}
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </td>
+        </>
       )
     }
 }

@@ -1,10 +1,1 @@
-.guest {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-around;
-}
 
-.guest ul {
-    display: flex;
-    justify-content: space-evenly;
-}

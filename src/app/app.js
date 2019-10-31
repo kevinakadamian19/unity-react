@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Link} from 'react-router-dom';
 import UnityContext from '../UnityContext';
 import Overview from '../Overview/Overview';
 import AddGuest from '../AddGuest/AddGuest';
 import AddExpense from '../AddExpense/AddExpense'
 import tableData from '../dummy-data';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './app.css'
 
 class App extends Component {
@@ -70,8 +72,11 @@ class App extends Component {
         <div className='App'>
           <main className="main">
             <header className="banner">
-              <h1>Unity Assistant</h1>
-              <h4>Your personal wedding planner assistant!</h4>
+              <h1>
+                <Link className='link' to='/'>Unity</Link>
+                <FontAwesomeIcon icon={faHeart} />
+              </h1>
+              <h4>Your personal wedding organizer!</h4>
             </header>
               <Route 
               exact

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ValidationError from '../ValidationError';
 import UnityContext from '../UnityContext';
 import PropType from 'prop-types';
+import './AddGuest.css'
 
 class AddGuest extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class AddGuest extends Component {
       if(name.length === 0) {
         return 'Name is required';
       } else if (name.length < 2) {
-        return 'Name must be at least 2 characters long';
+        return 'Must be at least 2 characters';
       }
     }
 
@@ -82,16 +83,16 @@ class AddGuest extends Component {
       if(email.length === 0) {
         return 'Email is required';
       } else if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) === false ) {
-        return 'Please enter a valid email address';
+        return 'Invalid email address';
       }
     }
     render() {
       const nameError = this.validateGuestName();
       const emailError = this.validateEmail();
       return(
-        <div className='Add-Guest'>
+        <div className='add-guest'>
           <h2>Add Guest</h2>
-          <form onSubmit={e => this.handleSubmit(e)}>
+          <form className='add-guest-form' onSubmit={e => this.handleSubmit(e)}>
             <div className='field'>
               <label htmlFor='guest-name-input'>
                 Name: 
@@ -102,7 +103,7 @@ class AddGuest extends Component {
                 name='guest-name'
                 onChange={e => this.updateGuestName(e.target.value)}
               />
-               {this.state.name.touch && 
+               {this.state.name.touched && 
               (<ValidationError message={nameError}/>)}
             </div>
             <div className='field'>
@@ -115,7 +116,7 @@ class AddGuest extends Component {
                 name='guest-email'
                 onChange={e => this.updateGuestEmail(e.target.value)}
               />
-              {this.state.email.touch && 
+              {this.state.email.touched && 
               (<ValidationError message={emailError}/>)}
             </div>
           <button 

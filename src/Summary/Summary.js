@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import ValidationError from '../ValidationError'
-import './Weddings.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserFriends, faPiggyBank, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import UnityContext from '../UnityContext';
+import './Summary.css'
 
 
 class Weddings extends Component {
@@ -23,7 +25,7 @@ class Weddings extends Component {
     handleSubmit = e => {
         e.preventDefault();
         const newWedding = {
-            budget: e.target['budget-input'].value
+            budget: e.target['summary-input'].value
         };
         this.context.updateWedding(newWedding);
         /*
@@ -72,34 +74,51 @@ class Weddings extends Component {
         const costSum = arr => arr.reduce((a,b) => a +b, 0)
         return costSum(costs)
     }
+
+    calculateRemainingBudget(a,b) {
+        return a -b;
+    }
     
     render() {
         const {budget} = this.context.weddings;
         const budgetError = this.validateBudgetValue;
-        const {expenses} = this.context;
+        const {expenses, guests} = this.context;
+        const totalSpent = this.calculateTotalExpenses(expenses)
+        const remainingBudget = this.calculateRemainingBudget(budget, totalSpent)
         return(
-            <div className='finances'>
-                <h2>Spending Overview</h2>
-                <h3>${this.calculateTotalExpenses(expenses)} / ${budget}</h3>
-                <form className='budget-input' onSubmit={e => this.handleSubmit(e)}>
-                    <div className='field'>
-                        <label htmlFor='budget-input'>
-                            Set budget:
-                        </label>
-                        <input 
-                            type='number' 
-                            id='budget-input' 
-                            name='budget-input'
-                            onChange={e => this.updateBudgetValue(e.target.value)}
-                        />
-                        {this.state.budget.touched.value && (
-                            <ValidationError message={budgetError} />
-                        )}
-                    </div>
-                <button 
-                    type='submit'>Save</button>
-                </form>
-
+            <div className='summary'>
+                <h1>Summary</h1>
+                <div className='summary-details'>
+                    <h3>Guest Count
+                        <br /><FontAwesomeIcon icon={faUserFriends} /><br />
+                        {guests.length}
+                    </h3>
+                    <h3>Budget
+                        <br /><FontAwesomeIcon icon={faPiggyBank} /><br />
+                        ${budget}
+                    </h3>
+                    <h3>
+                        Remaining
+                        <br /><FontAwesomeIcon icon={faReceipt} /><br />
+                        ${remainingBudget}
+                    </h3>
+                </div>
+                    <form onSubmit={e => this.handleSubmit(e)}>
+                        <div className='field'>
+                            <input 
+                                type='number' 
+                                id='summary-input' 
+                                name='summary-input'
+                                placeholder='Update Budget'
+                                onChange={e => this.updateBudgetValue(e.target.value)}
+                            />
+                            {this.state.budget.touched.value && (
+                                <ValidationError message={budgetError} />
+                            )}
+                        </div>
+                    <button 
+                        type='submit'>Save</button>
+                    </form>
             </div>
         )
     }

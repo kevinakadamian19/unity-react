@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import UnityContext from '../UnityContext'
 import './Guest.css'
 
@@ -29,21 +31,22 @@ class Guest extends Component {
   }
 
     render() {
-      const {id, name, email} = this.props;
+      const { name, email} = this.props;
       return(
-        <div className='guest' id={id}>
-          <ul>
-            <li>{name}</li>
-            <li>{email}</li>
-          </ul>
-          <button 
-            className='guest-delete'
-            type="button"
-            onClick={e => this.handleClickDelete(e)}
-          >
-            Remove
-          </button>
-        </div>
+        <>
+          
+          <td>{name}</td>
+          <td>{email}</td>
+          <td>
+            <button 
+              className='guest-delete'
+              type="button"
+              onClick={e => this.handleClickDelete(e)}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </td>
+        </>
       )
     }
 }

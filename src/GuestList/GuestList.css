@@ -1,6 +1,18 @@
 .guest-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    border: 2px dotted black;
 }
+
+.fixed-guest-table {
+    width: 500px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 16px;
+    align-self: center;
+    
+}
+
+.fixed-guest-table tr {
+    display: grid;
+    grid-template-columns: 33% 34% 33%;
+ }

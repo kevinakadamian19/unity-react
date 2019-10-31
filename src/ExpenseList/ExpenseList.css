@@ -1,7 +1,18 @@
 .expense-list {
     display: flex;
     flex-direction: column;
-    align-content: space-between;
-    align-items: center;
-    border: 2px dotted black;
 }
+
+.fixed-expense-table {
+    width: 500px;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 16px;
+    align-self: center;
+
+}
+
+.fixed-expense-table tr {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+ }

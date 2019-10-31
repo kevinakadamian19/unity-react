@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import UnityContext from '../UnityContext';
 import ValidationError  from '../ValidationError';
 import PropType from 'prop-types'
+import './AddExpense.css'
 
 class AddExpense extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        expense: {
+        vendor: {
           value: '',
           touched: false
         },
@@ -32,7 +33,7 @@ class AddExpense extends Component {
       e.preventDefault();
       const newExpense = {
         id: 5,
-        expense: e.target['expense-item'].value,
+        vendor: e.target['expense-item'].value,
         note: e.target['expense-note'].value,
         price: e.target['expense-price'].value,
         eventId: 1
@@ -61,9 +62,9 @@ class AddExpense extends Component {
       })*/
     }
 
-    updateExpense(expense) {
+    updateVendor(vendor) {
       this.setState({
-        expense: {value: expense, touched: true}
+        vendor: {value: vendor, touched: true}
       })
     }
     updateNote(note) {
@@ -77,18 +78,18 @@ class AddExpense extends Component {
       })
     }
 
-    validateExpense(fieldValue) {
-      const expense = this.state.expense.value.trim();
-      if(expense.length === 0) {
-        return 'Name or title of expense is required';
-      } else if (expense.length < 3) {
-        return 'Name or title of expense must be at least 3 characters long';
+    validateVendor(fieldValue) {
+      const vendor = this.state.vendor.value.trim();
+      if(vendor.length === 0) {
+        return 'Vendor is required';
+      } else if (vendor.length < 3) {
+        return 'Must be at least 3 characters';
       }
     }
     validateNote(fieldValue) {
       const note = this.state.note.value.trim()
       if(note.length < 3) {
-        return 'Note must have at least 3 characters';
+        return 'Must have at least 3 characters';
       }
     }
     validatePrice(fieldValue) {
@@ -98,30 +99,30 @@ class AddExpense extends Component {
       }
     }
     render() {
-      const expenseError = this.validateExpense();
+      const vendorError = this.validateVendor();
       const noteError = this.validateNote();
       const priceError = this.validatePrice();
       return(
-        <div className='AddExpenseForm'>
+        <div className='add-expense'>
           <h2>Add Item</h2>
-          <form onSubmit={e => this.handleSubmit(e)}>
+          <form className='add-expense-form' onSubmit={e => this.handleSubmit(e)}>
             <div className='field'>
-              <label htmlFor='expense-item-input'>
-                Expense: 
+              <label htmlFor='expense-vendor-input'>
+                Vendor 
               </label>
               <input 
                 type='text' 
-                id='expense-item-input'
-                name='expense-item'
-                onChange={e => this.updateExpense(e.target.value)}
+                id='expense-vendor-input'
+                name='expense-vendor'
+                onChange={e => this.updateVendor(e.target.value)}
               />
-              {this.state.expense.touched && (
-                <ValidationError message={expenseError} />
+              {this.state.vendor.touched && (
+                <ValidationError message={vendorError} />
               )}
             </div>
             <div className='field'>
               <label htmlFor='expense-note-input'>
-                Note:
+                Note
               </label>
               <input 
                 type='text' 
@@ -135,7 +136,7 @@ class AddExpense extends Component {
             </div>
             <div className='field'>
               <label htmlFor='expense-price-input'>
-                Price:
+                Price
               </label>
               <input 
                 type='number' 
@@ -147,7 +148,7 @@ class AddExpense extends Component {
                 <ValidationError message={priceError} />
               )}
             </div>
-          <button type='submit'>Add Expense</button>
+          <button type='submit'>Add Item</button>
           </form>
         </div>
       )
@@ -157,7 +158,7 @@ class AddExpense extends Component {
 export default AddExpense;
 
 AddExpense.propType = {
-  expense: PropType.string.isRequired,
+  vendor: PropType.string.isRequired,
   note: PropType.string,
   price: PropType.number.isRequired
 }

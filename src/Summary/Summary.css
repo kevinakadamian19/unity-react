@@ -1,0 +1,22 @@
+.summary {
+    border: 3px solid #f2786d;
+    border-radius: 25px;
+}
+.summary-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    
+}
+
+h3 {
+    padding: 10px;
+}
+
+
+.field {
+    display: inline-block;
+   
+}

@@ -3,7 +3,7 @@ export default {
       {
         'id': '1',
         'spending': '0',
-        'budget': '32,000'
+        'budget': '32000'
       },
       {
         'id': '2',
@@ -14,38 +14,63 @@ export default {
     'guests': [
         {
           'id': '1',
-          'name': 'Li Shang',
+          'name': 'John Doe',
           'email': 'Be4Man@gmail.com',
           'eventId': '1'
         },
         {
           'id': '2',
-          'name': 'Zhu Fa',
+          'name': 'Jane Doe',
           'email': 'WarriorZu@gmail.com',
+          'eventId': '1'
+        },
+        {
+          'id': '3',
+          'name': 'Steve Rogers',
+          'email': 'Know2Swim@gmail.com',
+          'eventId': '1'
+        },
+        {
+          'id': '4',
+          'name': 'Mushu',
+          'email': 'Ringthegong@hotmail.com',
+          'eventId': '1'
+        },
+        {
+          'id': '5',
+          'name': 'John Nguyen',
+          'email': 'SleepingBeauty@hotmail.com',
           'eventId': '1'
         }
     ],
     'expenses': [
       {
           'id': '1',
-          'expense': `Po's Dumplings`,
-          'note': 'Catering: Pork, beef, chicken',
+          'vendor': `Po's Dumplings`,
+          'note': 'Catering',
           'price': '1000',
           'eventId': '1'
       },
       {
           'id': '2',
-          'expense': `Emporer's Palace`,
-          'note': 'Venue for Tea Ceremony',
+          'vendor': `Emporer's Palace`,
+          'note': 'Ceremony',
           'price': '2500',
           'eventId': '1'
       },
       {
           'id': '3',
-          'expense': 'Mushu Pork Roast',
-          'note': 'Gifts',
+          'vendor': 'Pork Roast',
+          'note': 'Catering',
           'price': '5000',
           'eventId': '1'
-      }
+      },
+      {
+        'id': '4',
+        'vendor': 'Fireworks',
+        'note': 'Props',
+        'price': '8000',
+        'eventId': '1'
+    }
     ]
   }

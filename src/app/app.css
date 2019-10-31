@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Parisienne|Lato&display=swap');
+
 * {
   box-sizing: border-box;
 }
@@ -5,23 +7,51 @@
 .App {
   display: flex;
   flex-direction: column;
-  font-family: "Open Sans",
+  font-family: "Lato", 
   sans-serif;
   font-size: 20px;
-  color: #444;
   text-align: center;
   line-height: 1.5;
+  color: #2d2a40;
 }
 
-li {
-  list-style: none;
+.link {
+  text-decoration: none;
+  color: #2d2a40;
 }
 
-p {
-  margin: 0 auto;
-  max-width: 650px;
+.App h1 {
+  font-family: 'Parisienne',
+  cursive;
+  text-decoration: none;
 }
 
-p + p {
-  margin-top: 15px;
+.App h4 {
+  font-family: 'Montserrat',
+  sans-serif;
+}
+
+.App tbody{
+  display:block;
+  width: 100%;
+  overflow: auto;
+  height: 150px;
+}
+
+.App thead {
+    display: block;
+    background-color: #f29f8d;
+}
+
+.App th {
+padding: 10px;
+}
+
+.App td {
+  padding: 10px;  
+}
+
+button:hover {
+  background: #F2786D;
+  transition: all .3s ease;
 }
