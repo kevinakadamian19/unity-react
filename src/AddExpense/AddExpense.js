@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import UnityContext from '../UnityContext';
 import ValidationError  from '../ValidationError';
+import config from '../config';
 import PropType from 'prop-types'
 import './AddExpense.css'
 
@@ -32,16 +33,12 @@ class AddExpense extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const newExpense = {
-        id: 5,
-        vendor: e.target['expense-item'].value,
+        vendor: e.target['expense-vendor'].value,
         note: e.target['expense-note'].value,
         price: e.target['expense-price'].value,
-        eventId: 1
+        event: 1
       };
-      this.context.addExpense(newExpense)
-      this.props.history.push('/')
-      /*
-      fetch(`${unityData}/expenses`, {
+      fetch(`${config.API_ENDPOINT}/expenses`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -55,11 +52,11 @@ class AddExpense extends Component {
       })
       .then(expense => {
         this.context.AddExpense(expense)
-        this.props.history.push(`/expenses/${expense.id}`)
+        this.props.history.push(`/`)
       })
       .catch(error => {
         console.error({error})
-      })*/
+      })
     }
 
     updateVendor(vendor) {

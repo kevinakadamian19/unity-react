@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ValidationError from '../ValidationError';
 import UnityContext from '../UnityContext';
 import PropType from 'prop-types';
+import config from '../config'
 import './AddGuest.css'
 
 class AddGuest extends Component {
@@ -29,14 +30,11 @@ class AddGuest extends Component {
     handleSubmit = e => {
       e.preventDefault();
       const newGuest = {
-        id: 7,
         name: e.target['guest-name'].value,
         email: e.target['guest-email'].value,
-        eventid: 1
+        event: 1
       }
-      this.context.addGuest(newGuest);
-      this.props.history.push('/')
-      /* fetch(`${unityData}/guests`, {
+      fetch(`${config.API_ENDPOINT}/guests`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -50,11 +48,11 @@ class AddGuest extends Component {
       })
       .then(guest => {
         this.context.addGuest(guest)
-        this.props.history.push(`/guest/${guest.id}`)
+        this.props.history.push(`/`)
       })
       .catch(error => {
         console.error({error})
-      }) */
+      })
     }
 
     updateGuestName(guest) {

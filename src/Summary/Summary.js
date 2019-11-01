@@ -3,6 +3,7 @@ import ValidationError from '../ValidationError'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserFriends, faPiggyBank, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import UnityContext from '../UnityContext';
+import config from '../config'
 import './Summary.css'
 
 
@@ -14,10 +15,6 @@ class Weddings extends Component {
                 value: 0,
                 touched: false
             },
-            spending: {
-                value: 0,
-                touched: false
-            }
         }
     }
     static contextType = UnityContext;
@@ -27,26 +24,24 @@ class Weddings extends Component {
         const newWedding = {
             budget: e.target['summary-input'].value
         };
-        this.context.updateWedding(newWedding);
-        /*
-        fetch(`${unityData}/weddings`, {
-            method: 'POST',
+        fetch(`${config.API_ENDPOINT}/weddings/1`, {
+            method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(budget)
+            body: JSON.stringify(newWedding)
         })
         .then(res =>  {
             if(!res.ok) {
                 return res.json().then(e => Promise.reject(e))
             } return res.json()
         })
-        .then(budget => {
-            this.context.updateBudget(budget)
+        .then(wedding => {
+            this.context.updateBudget(wedding)
         })
         .catch(error => {
             console.error({error})
-        })*/
+        })
     }
 
     updateBudgetValue = budget => {
@@ -65,24 +60,25 @@ class Weddings extends Component {
         }
     }
 
-    calculateTotalExpenses = arr => {
+    calculateTotalExpenses(arr) {
         let items = arr.length;
         let costs = [];
         for(let i=0; i < items; i++) {
            costs.push(parseInt(arr[i].price));
         }
-        const costSum = arr => arr.reduce((a,b) => a +b, 0)
+        const costSum = arr => arr.reduce((a,b) => a + b, 0)
         return costSum(costs)
     }
 
     calculateRemainingBudget(a,b) {
-        return a -b;
+        return a - b;
     }
     
     render() {
-        const {budget} = this.context.weddings;
         const budgetError = this.validateBudgetValue;
         const {expenses, guests} = this.context;
+        const {budget} = Number(this.context.weddings);
+        console.log(this.context.weddings)
         const totalSpent = this.calculateTotalExpenses(expenses)
         const remainingBudget = this.calculateRemainingBudget(budget, totalSpent)
         return(
@@ -124,8 +120,8 @@ class Weddings extends Component {
     }
 }
 
+export default Weddings;
+
 Weddings.defaultProps = {
     budget: 0
 }
-
-export default Weddings;

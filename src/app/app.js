@@ -4,7 +4,7 @@ import UnityContext from '../UnityContext';
 import Overview from '../Overview/Overview';
 import AddGuest from '../AddGuest/AddGuest';
 import AddExpense from '../AddExpense/AddExpense'
-import tableData from '../dummy-data';
+import config from '../config'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './app.css'
@@ -13,10 +13,40 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      weddings: tableData.weddings[0],
-      guests: tableData.guests,
-      expenses: tableData.expenses
+      weddings: [],
+      guests: [],
+      expenses: []
     }
+  }
+
+  componentDidMount() {
+    Promise.all([
+      fetch(`${config.API_ENDPOINT}/weddings/`),
+      fetch(`${config.API_ENDPOINT}/guests/`),
+      fetch(`${config.API_ENDPOINT}/expenses/`)
+    ])
+    .then(([weddingsRes, guestsRes, expensesRes]) => {
+      if(!weddingsRes.ok) {
+        return weddingsRes.json().then(e => Promise.reject(e))
+      }
+      if(!guestsRes.ok) {
+        return guestsRes.json().then(e => Promise.reject(e))
+      }
+      if(!expensesRes.ok) {
+        return expensesRes.json().then(e => Promise.reject(e))
+      }
+      return Promise.all([
+        weddingsRes.json(),
+        guestsRes.json(),
+        expensesRes.json()
+      ])
+    })
+    .then(([weddings, guests, expenses]) => {
+      this.setState({weddings, guests, expenses})
+    })
+    .catch(error => {
+      console.error({error})
+    })
   }
 
   handleUpdateWedding = wedding => {
@@ -58,7 +88,7 @@ class App extends Component {
 
   render() {
     const contextValue = {
-      weddings: this.state.weddings,
+      weddings: this.state.weddings[0],
       guests: this.state.guests,
       expenses: this.state.expenses,
       updateWedding: this.handleUpdateWedding,

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import UnityContext from'../UnityContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import config from '../config'
+import UnityContext from'../UnityContext'
+import PropTypes from 'prop-types'
 import './Expense.css'
 
 class Expense extends Component {
@@ -10,8 +12,8 @@ class Expense extends Component {
     handleClickDelete = e => {
       e.preventDefault();
       const expenseId = this.props.id
-      this.context.deleteExpense(expenseId)
-      /*fetch(`${unityData}/expenses/${expenseId}`, {
+      
+      fetch(`${config.API_ENDPOINT}/expenses/${expenseId}`, {
         method: 'DELETE',
         headers: {
           'content-type': 'application/json'
@@ -27,7 +29,7 @@ class Expense extends Component {
       })
       .catch(error => {
         console.error({error})
-      })*/
+      })
     }
     render() {
       const {vendor, note, price} = this.props;
@@ -51,3 +53,9 @@ class Expense extends Component {
 }
 
 export default Expense
+
+Expense.propTypes = {
+  vendor: PropTypes.string.isRequired,
+  note: PropTypes.string,
+  price: PropTypes.number
+}

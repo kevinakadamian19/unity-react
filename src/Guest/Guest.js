@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import config from '../config'
 import UnityContext from '../UnityContext'
+import PropTypes from 'prop-types'
 import './Guest.css'
 
 class Guest extends Component {
@@ -11,7 +13,7 @@ class Guest extends Component {
     e.preventDefault();
     const guestId = this.props.id
     this.context.deleteGuest(guestId)
-    /*fetch(`${unityData}/guests/${guestId}`, {
+    fetch(`${config.API_ENDPOINT}/guests/${guestId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -27,14 +29,13 @@ class Guest extends Component {
     })
     .catch(error => {
       console.error({error})
-    })*/
+    })
   }
 
     render() {
       const { name, email} = this.props;
       return(
         <>
-          
           <td>{name}</td>
           <td>{email}</td>
           <td>
@@ -52,3 +53,8 @@ class Guest extends Component {
 }
 
 export default Guest;
+
+Guest.propTypes = {
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
+}
