@@ -12,7 +12,6 @@ class Guest extends Component {
   handleClickDelete = e => {
     e.preventDefault();
     const guestId = this.props.id
-    this.context.deleteGuest(guestId)
     fetch(`${config.API_ENDPOINT}/guests/${guestId}`, {
       method: 'DELETE',
       headers: {
@@ -22,7 +21,8 @@ class Guest extends Component {
     .then(res => {
       if(!res.ok) {
         return res.json().then(e => Promise.reject(e))
-      } return res.json()
+      } 
+      return res.json()
     })
     .then(() => {
       this.context.deleteGuest(guestId)

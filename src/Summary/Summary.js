@@ -29,12 +29,13 @@ class Weddings extends Component {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newWedding)
+            body: JSON.stringify(newWedding),
         })
         .then(res =>  {
             if(!res.ok) {
                 return res.json().then(e => Promise.reject(e))
-            } return res.json()
+            } 
+            return res.json()
         })
         .then(wedding => {
             this.context.updateBudget(wedding)
@@ -77,8 +78,8 @@ class Weddings extends Component {
     render() {
         const budgetError = this.validateBudgetValue;
         const {expenses, guests} = this.context;
-        const {budget} = Number(this.context.weddings);
-        console.log(this.context.weddings)
+        if (!this.context.weddings) return null;
+        const {budget} = this.context.weddings;
         const totalSpent = this.calculateTotalExpenses(expenses)
         const remainingBudget = this.calculateRemainingBudget(budget, totalSpent)
         return(
