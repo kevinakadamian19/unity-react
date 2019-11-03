@@ -17,6 +17,11 @@ class Weddings extends Component {
             },
         }
     }
+    static defaultProps = {
+      history: {
+        push: () => { }
+      }
+    }
     static contextType = UnityContext;
 
     handleSubmit = e => {
@@ -29,16 +34,17 @@ class Weddings extends Component {
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newWedding),
+            body: JSON.stringify(newWedding)
         })
         .then(res =>  {
             if(!res.ok) {
                 return res.json().then(e => Promise.reject(e))
             } 
-            return res.json()
+            return;
         })
         .then(wedding => {
             this.context.updateBudget(wedding)
+            this.props.history.push('/')
         })
         .catch(error => {
             console.error({error})
@@ -62,26 +68,26 @@ class Weddings extends Component {
     }
 
     calculateTotalExpenses(arr) {
-        let items = arr.length;
-        let costs = [];
-        for(let i=0; i < items; i++) {
-           costs.push(parseInt(arr[i].price));
+        if (arr.length === 0) {
+            return arr = [];
         }
-        const costSum = arr => arr.reduce((a,b) => a + b, 0)
-        return costSum(costs)
+        let costs = [];
+        for(let i=0; i < arr.length; i++) {
+           costs.push(arr[i].price);
+        }
+        return costs.reduce((a,b) => a + b, 0)
     }
-
-    calculateRemainingBudget(a,b) {
+    calculateRemainder(a,b) {
         return a - b;
     }
-    
     render() {
         const budgetError = this.validateBudgetValue;
-        const {expenses, guests} = this.context;
-        if (!this.context.weddings) return null;
-        const {budget} = this.context.weddings;
+        const {expenses, guests, weddings} = this.context;
+        if(this.context.weddings.length === 0) return null;
+        if(this.context.expenses.length === 0) return null;
+        const currentBudget = this.context.weddings[0].budget;
         const totalSpent = this.calculateTotalExpenses(expenses)
-        const remainingBudget = this.calculateRemainingBudget(budget, totalSpent)
+        const remainder = this.calculateRemainder(currentBudget, totalSpent)
         return(
             <div className='summary'>
                 <h1>Summary</h1>
@@ -92,12 +98,12 @@ class Weddings extends Component {
                     </h3>
                     <h3>Budget
                         <br /><FontAwesomeIcon icon={faPiggyBank} /><br />
-                        ${budget}
+                        ${currentBudget}
                     </h3>
                     <h3>
                         Remaining
                         <br /><FontAwesomeIcon icon={faReceipt} /><br />
-                        ${remainingBudget}
+                        ${remainder}
                     </h3>
                 </div>
                     <form onSubmit={e => this.handleSubmit(e)}>
@@ -122,7 +128,3 @@ class Weddings extends Component {
 }
 
 export default Weddings;
-
-Weddings.defaultProps = {
-    budget: 0
-}

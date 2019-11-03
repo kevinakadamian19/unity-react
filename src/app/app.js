@@ -49,9 +49,9 @@ class App extends Component {
     })
   }
 
-  handleUpdateWedding = wedding => {
+  handleUpdateBudget = budget => {
     this.setState({
-     weddings: wedding
+     budget: budget
     })
   }
 
@@ -88,10 +88,10 @@ class App extends Component {
 
   render() {
     const contextValue = {
-      weddings: this.state.weddings[0],
+      weddings: this.state.weddings,
       guests: this.state.guests,
       expenses: this.state.expenses,
-      updateWedding: this.handleUpdateWedding,
+      updateBudget: this.handleUpdateBudget,
       addGuest: this.handleAddGuest,
       addExpense: this.handleAddExpense,
       deleteExpense: this.handleDeleteExpense,
@@ -130,3 +130,9 @@ class App extends Component {
 }
 
 export default App;
+
+App.defaultProps = {
+  weddings: [],
+  guests: [],
+  expenses: []
+}

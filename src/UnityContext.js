@@ -4,9 +4,9 @@ export default React.createContext({
     weddings: [],
     guests: [],
     expenses: [],
-    updateWedding: () => {},
+    updateBudget: () => {},
     addGuest: () => {},
     addExpense: () => {},
     deleteGuest: () => {},
-    deleteExpense: () => {},
+    deleteExpense: () => {}
 })

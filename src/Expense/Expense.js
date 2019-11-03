@@ -22,7 +22,8 @@ class Expense extends Component {
       .then(res => {
         if(!res.ok) {
           return res.json().then(e => Promise.reject(e))
-        } return res.json()
+        } 
+        return;
       })
       .then(() => {
         this.context.deleteExpense(expenseId)
@@ -52,7 +53,7 @@ class Expense extends Component {
     }
 }
 
-export default Expense
+export default Expense;
 
 Expense.propTypes = {
   vendor: PropTypes.string.isRequired,

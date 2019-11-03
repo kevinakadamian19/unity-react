@@ -48,10 +48,11 @@ class AddExpense extends Component {
       .then(res => {
         if(!res.ok) {
           res.json().then(e => Promise.reject(e))
-        } res.json()
+        } 
+        res.json()
       })
       .then(expense => {
-        this.context.AddExpense(expense)
+        this.context.addExpense(expense)
         this.props.history.push(`/`)
       })
       .catch(error => {
@@ -145,7 +146,15 @@ class AddExpense extends Component {
                 <ValidationError message={priceError} />
               )}
             </div>
-          <button type='submit'>Add Item</button>
+          <button 
+            type='submit'
+            disabled={
+              this.validateVendor() ||
+              this.validatePrice() || 
+              this.validateNote()
+            }>
+              Add Item
+            </button>
           </form>
         </div>
       )

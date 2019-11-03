@@ -12,7 +12,7 @@ class ExpenseList extends Component {
       params: {}
     },
     history: {
-      push: () => { }
+      push: () => {}
     },
   }
     static contextType = UnityContext;
@@ -21,10 +21,12 @@ class ExpenseList extends Component {
       this.props.history.push('/')
     }
     render() {
+        
         const {expenses} = this.context;
+    
         return(
             <div className='expense-list'>
-              <h1>To-Do <FontAwesomeIcon icon={faListAlt} /></h1>
+              <h1>To-Do <FontAwesomeIcon icon={faListAlt}/></h1>
               <table className='fixed-expense-table'>
                 <thead>
                   <tr>
@@ -35,17 +37,19 @@ class ExpenseList extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {expenses.map(expense => 
+                  {this.context.expenses
+                  ? expenses.map(expense => 
                     <tr key={expense.id}>
-                          { <Expense
+                          <Expense
                             id={expense.id}
                             vendor={expense.vendor}
                             note={expense.note}
                             price={expense.price}
                             onDeleteExpense={this.handleDeleteExpense}
-                          /> }
+                          />
                     </tr>
-                  )}
+                  )
+        : <tr></tr>}
                 </tbody>
               </table>
               <Link  to='/add-expense'>

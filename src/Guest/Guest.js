@@ -22,7 +22,7 @@ class Guest extends Component {
       if(!res.ok) {
         return res.json().then(e => Promise.reject(e))
       } 
-      return res.json()
+      return;
     })
     .then(() => {
       this.context.deleteGuest(guestId)
