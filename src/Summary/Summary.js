@@ -42,8 +42,8 @@ class Weddings extends Component {
             } 
             return;
         })
-        .then(wedding => {
-            this.context.updateBudget(wedding)
+        .then(() => {
+            this.context.updateBudget(newWedding)
             this.props.history.push('/')
         })
         .catch(error => {
@@ -82,7 +82,7 @@ class Weddings extends Component {
     }
     render() {
         const budgetError = this.validateBudgetValue;
-        const {expenses, guests, weddings} = this.context;
+        const {expenses, guests} = this.context;
         if(this.context.weddings.length === 0) return null;
         if(this.context.expenses.length === 0) return null;
         const currentBudget = this.context.weddings[0].budget;

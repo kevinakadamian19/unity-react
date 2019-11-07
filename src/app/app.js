@@ -51,7 +51,10 @@ class App extends Component {
 
   handleUpdateBudget = budget => {
     this.setState({
-     budget: budget
+     weddings: [
+       ...this.state.weddings,
+       budget
+     ]
     })
   }
 

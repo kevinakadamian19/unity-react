@@ -49,9 +49,10 @@ class AddExpense extends Component {
         if(!res.ok) {
           res.json().then(e => Promise.reject(e))
         } 
-        res.json()
+        return res.json()
       })
       .then(expense => {
+        console.log('this is after post', expense)
         this.context.addExpense(expense)
         this.props.history.push(`/`)
       })
