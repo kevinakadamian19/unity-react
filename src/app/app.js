@@ -20,10 +20,17 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const options = {
+      method: 'GET',
+      headers: {
+        "Authorization": `${config.API_KEY}`,
+        "Content-Type": "application/json"
+        }
+      };
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/weddings/`),
-      fetch(`${config.API_ENDPOINT}/guests/`),
-      fetch(`${config.API_ENDPOINT}/expenses/`)
+      fetch(`${config.API_ENDPOINT}/api/weddings`, options),
+      fetch(`${config.API_ENDPOINT}/api/guests`, options),
+      fetch(`${config.API_ENDPOINT}/api/expenses`, options)
     ])
     .then(([weddingsRes, guestsRes, expensesRes]) => {
       if(!weddingsRes.ok) {
@@ -42,7 +49,10 @@ class App extends Component {
       ])
     })
     .then(([weddings, guests, expenses]) => {
-      this.setState({weddings, guests, expenses})
+      this.setState({
+        weddings: weddings, 
+        guests: guests, 
+        expenses: expenses})
     })
     .catch(error => {
       console.error({error})
@@ -99,7 +109,8 @@ class App extends Component {
       addExpense: this.handleAddExpense,
       deleteExpense: this.handleDeleteExpense,
       deleteGuest: this.handleDeleteGuest
-    } 
+    }
+    console.log(this.state)
     return (
       <UnityContext.Provider value={contextValue}>
         <div className='App'>

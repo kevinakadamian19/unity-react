@@ -41,7 +41,8 @@ class AddExpense extends Component {
       fetch(`${config.API_ENDPOINT}/expenses`, {
         method: 'POST',
         headers: {
-          'content-type': 'application/json'
+          'content-type': 'application/json',
+          'Authorization': `${config.API_KEY}`
         },
         body: JSON.stringify(newExpense)
       })

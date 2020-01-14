@@ -29,10 +29,11 @@ class Weddings extends Component {
         const newWedding = {
             budget: e.target['summary-input'].value
         };
-        fetch(`${config.API_ENDPOINT}/weddings/1`, {
+        fetch(`${config.API_ENDPOINT}/api/weddings/1`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization': `${config.API_KEY}`
             },
             body: JSON.stringify(newWedding)
         })
